@@ -24,6 +24,7 @@ Each step is written as a Kubeflow component.
 ---
 
 ## 2. Repository Structure
+```bash
 mlops-kubeflow-assignment/
 │
 ├── data/
@@ -46,6 +47,7 @@ mlops-kubeflow-assignment/
 ├── requirements.txt
 ├── Dockerfile
 └── Jenkinsfile
+```
 
 
 ---
