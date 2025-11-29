@@ -49,8 +49,27 @@ mlops-kubeflow-assignment/
 └── Jenkinsfile
 ```
 
+### Pipeline Walkthrough
+
+1. Compile the pipeline:
+   python pipeline.py
+
+2. Upload boston_housing_pipeline.yaml to Kubeflow UI.
+
+3. Create a new Experiment and start a Run.
+
+4. You should see four steps:
+   - data-extraction
+   - data-preprocessing
+   - model-training
+   - model-evaluation
+
+5. When the run finishes, check:
+   - Metrics tab (model accuracy)
+   - Artifacts section (saved model outputs)
 
 ---
+
 
 ## 3. Setup Instructions
 
@@ -85,6 +104,12 @@ dvc remote add -d storage ./dvc_storage
 ### 4.4 Push Data
 dvc push
 
+### 4.5 Configure DVC Remote Storage
+
+mkdir dvc_storage
+dvc remote add -d storage ./dvc_storage
+dvc push
+
 ## 5. Kubeflow Pipeline
 ### 5.1 Compile the Pipeline
 python pipeline.py
@@ -106,6 +131,21 @@ Upload boston_housing_pipeline.yaml
 
 Run the pipeline
 
+
+### 5.3 Kubeflow Pipelines Setup
+
+1. Deploy Kubeflow Pipelines:
+   kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=1.8.5"
+
+2. Wait for services:
+   kubectl wait --for=condition=available --timeout=600s deployment/ml-pipeline -n kubeflow
+
+3. Open the UI:
+   kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
+
+4. Access in browser:
+   http://localhost:8080/
+
 ## 6. CI/CD with Jenkins
 
 Install Jenkins
@@ -122,4 +162,18 @@ Stage 2: Pipeline Compilation (syntax check)
 
 Stage 3: Completion
 
+### 6.1 Jenkins Setup
+
+1. Start Jenkins:
+   docker run -p 8081:8080 -p 50000:50000 jenkins/jenkins:lts
+
+2. Open Jenkins at:
+   http://localhost:8081/
+
+3. Create a new Pipeline job:
+   - Choose “Pipeline”
+   - Select “Pipeline from SCM”
+   - Add GitHub repo URL
+
+4. Jenkins will run the Jenkinsfile automatically.
 
