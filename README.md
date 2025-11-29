@@ -56,15 +56,17 @@ mlops-kubeflow-assignment/
 ```bash
 git clone https://github.com/<your-username>/mlops-kubeflow-assignment.git
 cd mlops-kubeflow-assignment
-3.2 Install Python Dependencies
+```
+
+### 3.2 Install Python Dependencies
 pip install -r requirements.txt
 
 ---
-4. DVC Setup
-4.1 Initialize DVC
+## 4. DVC Setup
+### 4.1 Initialize DVC
 dvc init
 
-4.2 Add Dataset
+### 4.2 Add Dataset
 
 Place your dataset inside data/raw_data.csv and run:
 
@@ -72,17 +74,17 @@ dvc add data/raw_data.csv
 git add data/raw_data.csv.dvc .gitignore
 git commit -m "Added dataset with DVC tracking"
 
-4.3 Configure Remote Storage
+### 4.3 Configure Remote Storage
 
 (E.g., local remote folder)
 
 dvc remote add -d storage ./dvc_storage
 
-4.4 Push Data
+### 4.4 Push Data
 dvc push
 
-5. Kubeflow Pipeline
-5.1 Compile the Pipeline
+## 5. Kubeflow Pipeline
+### 5.1 Compile the Pipeline
 python pipeline.py
 
 
@@ -90,7 +92,7 @@ This generates:
 
 boston_housing_pipeline.yaml
 
-5.2 Running on Kubeflow
+### 5.2 Running on Kubeflow
 
 Start Minikube
 
@@ -102,7 +104,7 @@ Upload boston_housing_pipeline.yaml
 
 Run the pipeline
 
-6. CI/CD with Jenkins
+## 6. CI/CD with Jenkins
 
 Install Jenkins
 
@@ -118,13 +120,4 @@ Stage 2: Pipeline Compilation (syntax check)
 
 Stage 3: Completion
 
-7. Final Deliverables
-
-DVC versioning proof
-
-Kubeflow run screenshots
-
-Jenkins successful build
-
-Full working repository
 
