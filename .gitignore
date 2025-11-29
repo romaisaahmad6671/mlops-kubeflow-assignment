@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+
+# DVC local cache (never track this)
+.dvc/cache/
+
+# Data files (we only track .dvc file)
+data/raw_data.csv
